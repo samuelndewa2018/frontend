@@ -2,37 +2,111 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.hero {
+  height: 100%;
+  width: 100%;
+  background-position: center;
+  background-size: cover;
+  position: absolute;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.form-box {
+  width: 480px;
+  height: 580px;
+  position: relative;
+  margin: 2% auto;
+  background: #fff;
+  padding: 5px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.button-box {
+  width: 360px;
+  height: 50px;
+  margin: 35px auto;
+  position: relative;
+  box-shadow: 0 0 20px 9px #ff61241f;
+  border-radius: 30px;
+  overflow: hidden; /* Added to hide overflowing content */
 }
 
-.App-link {
-  color: #61dafb;
+.slide-right {
+  transform: translateX(-100%);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.slide-left {
+  transform: translateX(-0);
 }
+
+.toggle-btn {
+  padding: 15px 15px; /* Adjusted padding */
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  outline: none;
+  position: absolute;
+  color: #000;
+  font-size: 16px;
+  transition: 0.5s;
+}
+
+.toggle-btn:first-child {
+  left: 10;
+}
+
+.toggle-btn:last-child {
+  left: 100%;
+}
+
+#btn {
+  top: 0;
+  left: 0;
+  position: absolute;
+  height: 50px;
+  width: 50%;
+  background: linear-gradient(to right, #ff105f, #ffad06);
+  border-radius: 30px;
+  transition: 0.5s;
+}
+form {
+  background-color: #fff;
+  width: 480px;
+  height: 70%;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  text-align: center;
+  color: #333;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.textarea {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 16px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+button {
+  padding: 5px 15px;
+  border: none;
+  outline: none;
+  color: #fff;
+  border-radius: 5px;
+  background: blue;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* button:hover {
+  background-color: #0056b3;
+} */
