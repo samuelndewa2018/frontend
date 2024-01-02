@@ -10,7 +10,7 @@ function App() {
   useEffect(() => {
     const fetchQRCode = async () => {
       try {
-        const response = await fetch("http://localhost:3001/qr-code");
+        const response = await fetch("http://localhost:8000/qr-code");
         const data = await response.text();
         setQrCode(data);
       } catch (error) {
@@ -20,7 +20,7 @@ function App() {
 
     const fetchClientStatus = async () => {
       try {
-        const response = await fetch("http://localhost:3001/client-status"); // Replace with your server URL
+        const response = await fetch("http://localhost:8000/client-status"); // Replace with your server URL
         const data = await response.json();
         setIsClientReady(data.isClientReady);
         console.log("client", isClientReady);

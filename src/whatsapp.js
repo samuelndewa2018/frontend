@@ -64,30 +64,33 @@ const Form2 = () => {
     try {
       const formData = new FormData();
       formData.append("name", name);
-      formData.append("image", image);
-      await axios.post("http://localhost:3001/client-status", {
-        name,
-        image,
+      formData.append("image", image, "image.jpg");
+
+      await axios.post("http://localhost:8000/send-ads", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
       });
 
-      toast.success("Category and sub-category created!");
+      toast.success("Ads sent to subscribers");
     } catch (error) {
       toast.error(error.response.data);
     }
   };
 
   const handleImageChange = (e) => {
-    const files = Array.from(e.target.files);
+    const file = e.target.files[0];
 
-    files.forEach((file) => {
+    if (file) {
+      setImage(file);
       const reader = new FileReader();
       reader.onload = () => {
-        setImage(reader.result);
         setImagePreview(reader.result);
       };
       reader.readAsDataURL(file);
-    });
+    }
   };
+
   return (
     <form onSubmit={handleCreateCategory} className="w-full">
       <div className="w-full block p-4">
@@ -117,7 +120,7 @@ const Form2 = () => {
               className="hidden"
               id="upload"
               required
-              name=""
+              name="image"
               onChange={handleImageChange}
             />
             {/* Image preview */}
