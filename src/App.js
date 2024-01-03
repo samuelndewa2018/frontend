@@ -1,45 +1,40 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import QRCode from "react-qr-code";
+import io from "socket.io-client";
 import Announcement from "./whatsapp";
+const socket = io.connect("http://localhost:3001", {});
 
 function App() {
   const [qrCode, setQrCode] = useState("");
   const [isClientReady, setIsClientReady] = useState(false);
 
+  // useEffect(() => {
+  //   const fetchQRCode = async () => {
+  //     try {
+  //       const response = await fetch("http://localhost:8000/qr-code");
+  //       const data = await response.text();
+  //       setQrCode(data);
+  //     } catch (error) {
+  //       console.error("Error fetching QR code:", error);
+  //     }
+  //   };
+
   useEffect(() => {
-    const fetchQRCode = async () => {
-      try {
-        const response = await fetch("http://localhost:8000/qr-code");
-        const data = await response.text();
-        setQrCode(data);
-      } catch (error) {
-        console.error("Error fetching QR code:", error);
-      }
-    };
+    socket.on("hello", (data) => {
+      console.log("Server says:", data);
+    });
 
-    const fetchClientStatus = async () => {
-      try {
-        const response = await fetch("http://localhost:8000/client-status"); // Replace with your server URL
-        const data = await response.json();
-        setIsClientReady(data.isClientReady);
-        console.log("client", isClientReady);
-      } catch (error) {
-        console.error("Error fetching client status:", error);
-      }
-    };
-
-    fetchQRCode();
-    fetchClientStatus();
-
-    const intervalId = setInterval(() => {
-      fetchQRCode();
-      fetchClientStatus();
-    }, 10000);
-
-    return () => {
-      clearInterval(intervalId);
-    };
+    socket.on("qr", (data) => {
+      const { qr } = data;
+      console.log("the qr code is", qr);
+      setQrCode(qr);
+    });
+    socket.on("clientReady", (data) => {
+      const { isClientReady } = data;
+      console.log("the client is", isClientReady);
+      setIsClientReady(isClientReady);
+    });
   }, []);
 
   return (

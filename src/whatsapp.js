@@ -66,7 +66,7 @@ const Form2 = () => {
       formData.append("name", name);
       formData.append("image", image, "image.jpg");
 
-      await axios.post("http://localhost:8000/send-ads", formData, {
+      await axios.post("http://localhost:3001/send-ads", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
